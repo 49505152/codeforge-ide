@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeForge IDE - Web-Based C Programming Environment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main IDE Container -->
+    <div class="ide-container">
+        <!-- Header/Toolbar -->
+        <header class="ide-header">
+            <div class="logo-section">
+                <h1 class="ide-title">
+                    <span class="logo-icon">⚡</span>
+                    CodeForge IDE
+                </h1>
+                <span class="version-tag">v1.0</span>
+            </div>
+            
+            <div class="toolbar">
+                <button class="btn btn--primary" id="compileBtn">
+                    <span class="btn-icon">▶</span>
+                    Compile & Run
+                </button>
+                <button class="btn btn--secondary" id="newFileBtn">
+                    <span class="btn-icon">📄</span>
+                    New File
+                </button>
+                <button class="btn btn--secondary" id="saveBtn">
+                    <span class="btn-icon">💾</span>
+                    Save
+                </button>
+                <button class="btn btn--outline" id="themeToggle">
+                    <span class="btn-icon">🌙</span>
+                    Dark
+                </button>
+                <button class="btn btn--outline" id="helpBtn">
+                    <span class="btn-icon">❓</span>
+                    Help
+                </button>
+            </div>
+        </header>
+
+        <!-- Main IDE Layout -->
+        <div class="ide-main">
+            <!-- Left Sidebar - File Explorer -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3>File Explorer</h3>
+                    <button class="btn btn--sm" id="createFileBtn">+</button>
+                </div>
+                <div class="file-tree" id="fileTree">
+                    <div class="file-item active" data-file="main.c">
+                        <span class="file-icon">📄</span>
+                        <span class="file-name">main.c</span>
+                        <button class="delete-btn" data-file="main.c">×</button>
+                    </div>
+                </div>
+                
+                <!-- Examples Section -->
+                <div class="examples-section">
+                    <h4>Example Programs</h4>
+                    <div class="example-list" id="exampleList">
+                        <div class="example-item" data-example="0">Hello World</div>
+                        <div class="example-item" data-example="1">Basic Calculator</div>
+                        <div class="example-item" data-example="2">For Loop Example</div>
+                        <div class="example-item" data-example="3">Functions Example</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Editor Section -->
+                <section class="editor-section">
+                    <div class="editor-header">
+                        <span class="current-file" id="currentFileName">main.c</span>
+                        <div class="editor-info">
+                            <span id="cursorPosition">Ln 1, Col 1</span>
+                            <span class="language-tag">C</span>
+                        </div>
+                    </div>
+                    
+                    <div class="editor-container">
+                        <div class="line-numbers" id="lineNumbers">1</div>
+                        <textarea 
+                            class="code-editor" 
+                            id="codeEditor" 
+                            placeholder="// Welcome to CodeForge IDE - Start writing your C code here
+#include <stdio.h>
+
+int main() {
+    printf(&quot;Hello, World!\n&quot;);
+    return 0;
+}"
+                            spellcheck="false"
+                        ></textarea>
+                    </div>
+                </section>
+
+                <!-- Output Console -->
+                <section class="console-section">
+                    <div class="console-header">
+                        <h4>Output Console</h4>
+                        <button class="btn btn--sm" id="clearConsole">Clear</button>
+                    </div>
+                    <div class="console-output" id="consoleOutput">
+                        <div class="console-welcome">
+                            Welcome to CodeForge IDE! Write your C code above and click "Compile & Run" to see the output.
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Help Panel (Hidden by default) -->
+            <aside class="help-panel hidden" id="helpPanel">
+                <div class="help-header">
+                    <h3>C Programming Help</h3>
+                    <button class="btn btn--sm" id="closeHelp">×</button>
+                </div>
+                <div class="help-content" id="helpContent">
+                    <div class="help-topic">
+                        <h4>Basic Syntax</h4>
+                        <p>C programs start with #include &lt;stdio.h&gt; for input/output operations. The main() function is the entry point of every C program.</p>
+                    </div>
+                    <div class="help-topic">
+                        <h4>Variables</h4>
+                        <p>Declare variables with their type: int age = 25; float price = 99.99; char grade = 'A';</p>
+                    </div>
+                    <div class="help-topic">
+                        <h4>Printf Function</h4>
+                        <p>Use printf() to display output: printf("Hello %s, you are %d years old", name, age);</p>
+                    </div>
+                    <div class="help-topic">
+                        <h4>Loops</h4>
+                        <p>for(int i=0; i&lt;10; i++) { /* code */ } creates a loop that runs 10 times.</p>
+                    </div>
+                    <div class="help-topic">
+                        <h4>Functions</h4>
+                        <p>Define functions: int functionName(int parameter) { return value; }</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Status Bar -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span id="statusMessage">Ready</span>
+            </div>
+            <div class="status-right">
+                <span class="file-count" id="fileCount">1 file</span>
+                <span class="theme-indicator" id="themeIndicator">Dark Mode</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Compiling...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
